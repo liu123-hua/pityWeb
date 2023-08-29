@@ -100,6 +100,7 @@ const Postman = ({loading: gloading, gconfig, dispatch}) => {
 
   // 根据paramsData拼接url
   const joinUrl = (data) => {
+    console.log(data)
     let tempUrl = url.split('?')[0];
     data.forEach((item, idx) => {
       if (item.key) {
@@ -115,6 +116,7 @@ const Postman = ({loading: gloading, gconfig, dispatch}) => {
   };
 
   const splitUrl = (nowUrl) => {
+    console.log(data)
     const split = nowUrl.split('?');
     if (split.length < 2) {
       setParamsData([]);

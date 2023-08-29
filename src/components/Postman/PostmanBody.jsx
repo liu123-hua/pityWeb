@@ -69,7 +69,8 @@ const PostmanBody = ({
   const [headersKeys, setHeadersKeys] = useState(() => headers.map((item) => item.id));
   const [loading, setLoading] = useState(false);
   const [response, setResponse] = useState({});
-  const [url, setUrl] = useState('');
+  const [reqUrl, setReqUrl] = useState('');
+  const [basePath, setBasePath] = useState('');
   const [editor, setEditor] = useState(null);
   const [open, setOpen] = useState(false);
   const {ossFileList, envMap, addressList} = gconfig;
@@ -109,7 +110,7 @@ const PostmanBody = ({
   }, [])
 
   const init = async () => {
-    setUrl(form.getFieldValue('url'));
+    setReqUrl(form.getFieldValue('url'));
     splitUrl(form.getFieldValue('url'))
   }
 
@@ -205,7 +206,9 @@ const PostmanBody = ({
 
   // 拼接http请求
   const onRequest = async () => {
-    const url = form.getFieldValue('url')
+    const url = reqUrl
+    
+    console.log(reqUrl)
     if (url === '') {
       notification.error({
         message: '请求Url不能为空',
@@ -365,6 +368,9 @@ const PostmanBody = ({
   }
 
   const currentAddress = getAddress();
+  const handleSelectChange = (value) => {
+    setBasePath(currentAddress[value][1]);
+  }
 
   const prefixSelector = (
     <Form.Item name="base_path" noStyle>
@@ -376,19 +382,26 @@ const PostmanBody = ({
                 }
                 return option.children.props.children.indexOf(input.toLowerCase()) >= 0
               }}
+              onChange = {handleSelectChange}
       >
         <Option value={null} label="无">无<a style={{float: 'right', fontSize: 12}} href="/#/config/address">去配置</a></Option>
         {
-          Object.keys(currentAddress).map(key => <Option value={key} key={key} label={key}><Tooltip title={
+          Object.keys(currentAddress).map(key => <Option value={key} key={key} label={key} ><Tooltip title={
             <div>
               {
                 Object.keys(currentAddress[key]).map(v => <p>
                   {envMap[v]}: {currentAddress[key][v]}
+                 
                 </p>)
+              
               }
+              
             </div>
+            
           }>
             {key}
+           
+          
           </Tooltip>
           </Option>)
         }
@@ -426,11 +439,16 @@ const PostmanBody = ({
                          rules={
                            [{required: true, message: "请输入请求url"}]
                          }>
+                        
                 <Input addonBefore={prefixSelector} style={{width: '100%'}} placeholder="请输入要请求的url"
                        onChange={(e) => {
-                         splitUrl(e.target.value);
+                        
+
+                         let url = `${basePath}${e.target.value}`
+                         console.log(url)
+                         splitUrl(url);
                          form.setFieldsValue({url: e.target.value})
-                         setUrl(e.target.value);
+                         setReqUrl(url);
                        }}/>
               </Form.Item>
             </Col>

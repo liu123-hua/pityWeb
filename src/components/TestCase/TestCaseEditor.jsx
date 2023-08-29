@@ -75,7 +75,7 @@ const TestCaseEditor = ({
             <TestCaseBottom case_id={caseId} body={body} bodyType={bodyType} setBody={setBody} headers={headers}
                             setHeaders={setHeaders} form={form} createMode={create}
                             formData={formData} setFormData={setFormData} setSuffix={setSuffix}
-                            setBodyType={setBodyType}
+                            setBodyType={setBodyType} onSubmit = {onSubmit}
             />
           </Col>
         </Row>

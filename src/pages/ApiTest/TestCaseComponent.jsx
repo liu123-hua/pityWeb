@@ -124,7 +124,8 @@ const TestCaseComponent = ({loading, dispatch, user, testcase, gconfig}) => {
 
   }
 
-  const onSubmit = async (isCreate = false) => {
+  const onSubmit = async (isCreate=false) => {
+    console.log(isCreate)
     const values = await form.validateFields()
     const params = {
       ...values,
@@ -137,7 +138,9 @@ const TestCaseComponent = ({loading, dispatch, user, testcase, gconfig}) => {
       body: bodyType === 2 ? JSON.stringify(formData) : body,
       out_parameters: filterOutParameters(),
     };
-    if (!editing && !isCreate) {
+  
+    if (!editing) {
+
       params.priority = caseInfo.priority;
       params.name = caseInfo.name;
       params.status = caseInfo.status;
@@ -284,7 +287,7 @@ const TestCaseComponent = ({loading, dispatch, user, testcase, gconfig}) => {
                       <TestCaseBottom setSuffix={setSuffix} headers={headers} setHeaders={setHeaders}
                                       body={body} setBody={setBody} case_id={case_id} formData={formData}
                                       setFormData={setFormData} bodyType={bodyType} form={form}
-                                      setBodyType={setBodyType} onSubmit={onSubmit}
+                                      setBodyType={setBodyType} onSubmit={()=>{onSubmit(false)}}
                       />
                     </Card>
                 }

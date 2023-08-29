@@ -168,6 +168,7 @@ const TestCaseBottom = ({
 
   // 获取全局变量
   useEffect(() => {
+    console.log(onSubmit)
     onFetchGConfigData();
   }, []);
 
@@ -476,9 +477,7 @@ const TestCaseBottom = ({
             createMode ? null : (
               <Button
                 style={{ marginRight: 8 }}
-                onClick={() => {
-                  onSubmit(false);
-                }}
+                onClick={()=>{onSubmit(false)}}
               >
                 <SaveOutlined />
                 保存
