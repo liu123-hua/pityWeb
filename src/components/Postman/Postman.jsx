@@ -116,7 +116,7 @@ const Postman = ({loading: gloading, gconfig, dispatch}) => {
   };
 
   const splitUrl = (nowUrl) => {
-    console.log(data)
+    
     const split = nowUrl.split('?');
     if (split.length < 2) {
       setParamsData([]);

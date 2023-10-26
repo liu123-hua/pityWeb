@@ -100,6 +100,7 @@ export default [
         name: '测试计划',
         component: './ApiTest/TestPlan',
       },
+     
     ],
   },
   {
@@ -199,6 +200,12 @@ export default [
         name: 'HTTP测试',
         icon: 'icon-yunhang',
         component: './Tool/Request',
+      },
+      {
+        path: '/tool/classpage',
+        icon: 'icon-yunhang',
+        name: '分班测试',
+        component: './Tool/ClassPage',
       },
       {
         path: '/tool/sql',
